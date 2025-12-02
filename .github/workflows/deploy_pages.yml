@@ -1,0 +1,56 @@
+name: Build and Deploy Website
+run-name: >
+  Deploy website –
+  ${{ github.event_name == 'workflow_run' && 'from LaTeX Build' || 'Manual Run' }}
+
+on:
+  workflow_run:
+    workflows: ["Build LaTeX documents"]
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    if: >-
+      ${{
+        (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+        || github.event_name == 'workflow_dispatch'
+      }}
+
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Python dependencies
+        run: pip install unidecode
+
+      - name: Run build_site.py
+        run: python build_site.py
+        working-directory: ./site
+
+      - name: Prepare artifact
+        run: |
+          mkdir -p site/docs
+          cp -r docs/* site/docs/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
