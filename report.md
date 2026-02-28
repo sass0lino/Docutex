@@ -1,14 +1,10 @@
-# Report di compilazione del 2026-02-28T16:49:44+00:00
+# Report di compilazione del 2026-02-28T16:55:22+00:00
 
-Compilazione basata sul commit a177921cc1ecda2468d44898eff04b74c6d84f93 (base: a177921)
+Compilazione basata sul commit cfa5c124abce6360661883eca046b2f3e2042a72 (base: cfa5c12)
 
 ## Falliti
 💡 Nessun errore di compilazione
 
 ## Compilati
-✅ [docs/scuola/matematica.pdf](docs/scuola/matematica.pdf)
-
-✅ [docs/scuola/Analisi_dei_Requisiti_v1.0.pdf](docs/scuola/Analisi_dei_Requisiti_v1.0.pdf)
-
-✅ [docs/scuola/oscillatore.pdf](docs/scuola/oscillatore.pdf)
+✅ [docs/lavoro/oscillatore.pdf](docs/lavoro/oscillatore.pdf)
 
