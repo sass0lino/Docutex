@@ -1,40 +1,30 @@
 # Guida all'uso del compilatore automatico
 
-### 1. Organizzazione dei file e Cartelle
-I progetti LaTeX vanno caricati nella cartella `src/`. Il sistema supporta due modalità:
-* **Progetti Mono-file:** Un singolo file `.tex` nella root o in una sottocartella.
-* **Progetti Multi-file:** È necessario avere un file `.tex` principale (il *main*) e una sottocartella chiamata **`contenuti/`** (o varianti come `Contenuti/`) dove posizionare i capitoli o le sezioni incluse.
-    > **Nota tecnica:** Il sistema riconosce automaticamente le modifiche ai file dentro le cartelle "contenuti" e innesca la ricompilazione di tutti i file `.tex` presenti nella cartella superiore (padre) per garantire che il documento principale venga aggiornato.
+### 1. Organizzazione dei file
+Caricare i sorgenti LaTeX nella cartella `src/`.
+* **Progetti Multi-file:** Devono avere un file principale e una cartella `contenuti/` (case-insensitive) per i file inclusi. Le modifiche ai file in `contenuti/` innescano automaticamente la ricompilazione del file padre.
 
-### 2. Gestione dei PDF Firmati
-I file PDF firmati **devono essere caricati manualmente** nella cartella `docs/`.
-Per evitare che il sistema di pulizia automatica li elimini (poiché non hanno un corrispettivo `.tex` in `src/`), è obbligatorio che il nome del file termini con:
-* `_firmato.pdf`
-* `_signed.pdf`
+### 2. File PDF Firmati
+I file firmati vanno caricati **manualmente** in `docs/`.
+Per evitarne la cancellazione automatica, il nome deve terminare obbligatoriamente con `_firmato.pdf` o `_signed.pdf` (es: `verbale_v1.0_firmato.pdf`).
 
-*Esempio corretto:* `verbale_v1.0_firmato.pdf`
-
-### 3. Convenzioni di Nomenclatura (Versionamento)
-Per garantire la corretta indicizzazione da parte del sito web e degli script di parsing:
-* **Versione:** Inserire la versione alla fine del nome del file (es: `nome_progetto_v0.1.5.tex`).
-* **Spazi:** Utilizzare l'underscore `_` o lo spazio standard.
-* **Date:** Utilizzare il trattino `-` per le date (es: `2023-10-12`).
-* **File Firmati:** Come indicato sopra, aggiungere il suffisso `_firmato` o `_signed` dopo la versione (es: `nome_progetto_v0.1.5_firmato.pdf`).
+### 3. Nomenclatura (Importante per il Sito Web)
+Per consentire allo script Python di generare correttamente l'albero dei file per il sito GitHub Pages, seguire queste regole:
+* **Versione:** Va posta alla fine del nome (es: `nome_progetto_v0.1.5.tex`).
+* **Separatori:** Usare `_` o spazi standard. Per le date usare il trattino `-` (es: `2023-10-12`).
+* **Firma:** Il suffisso `_firmato` deve seguire la versione (es: `nome_progetto_v0.1.5_firmato.pdf`).
 
 ### 4. Attivazione Manuale
-Oltre all'attivazione automatica su `push`, è possibile avviare la build manualmente dalla scheda **Actions** di GitHub selezionando il workflow e cliccando su "Run workflow".
+È possibile avviare la build manualmente dalla scheda **Actions** di GitHub selezionando il workflow e cliccando su "Run workflow".
 
-### 5. Report e Debug
-Al termine di ogni esecuzione, viene generato il file **`report.md`** nella root del repository. Consultatelo per verificare:
-* ✅ Quali file sono stati compilati con successo (con link diretto).
-* ❌ Quali file hanno fallito la compilazione (con link ai log di errore).
+### 5. Report
+Consultare il file `report.md` nella root del repository per verificare i file compilati con successo (con link diretto) e quelli falliti.
 
-### 6. Trigger, Aggiornamenti e Rigenerazione Totale
-Il sistema parte in automatico quando vengono aggiunti o modificati file `.tex` in `src/`.
-Tuttavia, esistono casi particolari per forzare la compilazione:
-* **Aggiornamento risorse esterne:** Se modificate solo immagini o bibliografia senza toccare i `.tex`, la build non parte. Per forzare l'aggiornamento, fate una modifica fittizia (es. uno spazio) nel file `.tex` principale oppure eliminate il singolo PDF da `docs/`.
-* **Rigenerazione Totale (Full Rebuild):** Per forzare la ricompilazione di **tutti** i documenti presenti nel repository, è sufficiente **eliminare completamente la cartella `docs/`** e fare il push. Il sistema rileverà l'assenza di tutti i PDF e li rigenererà da zero.
-    > ⚠️ **Attenzione:** Eliminando l'intera cartella `docs/` verranno persi anche i file firmati manualmente. Assicuratevi di averne una copia di backup da ricaricare successivamente.
+### 6. Trigger e Rigenerazione
+La build parte in automatico solo modificando file `.tex` in `src/`.
+* **Aggiornamento risorse esterne:** Se modificate solo immagini o bibliografia, forzate la build con una modifica fittizia nel `.tex` o eliminando il vecchio PDF da `docs/`.
+* **Rigenerazione Totale:** Per ricompilare tutto da zero, **eliminare l'intera cartella `docs/`** e fare il push.
+    > ⚠️ **Attenzione:** Questo rimuoverà anche i file firmati manuali, assicuratevi di averne una copia.
 
 # Obiettivi della build di compilazione automatica
 
