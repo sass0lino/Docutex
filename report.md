@@ -1,16 +1,17 @@
-# Report di compilazione del 2025-12-02T16:13:28+00:00
+# Report di compilazione del 2026-02-28T15:16:19+00:00
 
-Compilazione basata sul commit 4240a28e0d6d45c72d6a2f3390713d3acd1aa7ed (first commit)
+Compilazione basata sul commit bdaae4b4ed2225d194db7c66b69c70ba81530a69 (base: bdaae4b)
 
 ## Falliti
-💡 Nessun errore di compilazione
+❌ [src/lavoro/Contenuti/requisiti.tex](https://github.com/sass0lino/Docutex/actions/runs/22523328748)
+
+❌ [src/lavoro/Contenuti/tracciamento.tex](https://github.com/sass0lino/Docutex/actions/runs/22523328748)
+
+❌ [src/lavoro/Contenuti/use_cases.tex](https://github.com/sass0lino/Docutex/actions/runs/22523328748)
+
+❌ [src/lavoro/Analisi_dei_Requisiti_v1.0.tex](https://github.com/sass0lino/Docutex/actions/runs/22523328748)
+
 
 ## Compilati
-✅ [docs/scuola/oscillatore.pdf](docs/scuola/oscillatore.pdf)
-
-✅ [docs/scuola/matematica.pdf](docs/scuola/matematica.pdf)
-
-✅ [docs/lavoro/logistica.pdf](docs/lavoro/logistica.pdf)
-
-✅ [docs/base.pdf](docs/base.pdf)
+✅ [docs/logistica.pdf](docs/logistica.pdf)
 
