@@ -1,10 +1,10 @@
-# Report di compilazione del 2026-02-28T15:35:20+00:00
+# Report di compilazione del 2026-02-28T16:13:34+00:00
 
-Compilazione basata sul commit e739100f1c249d7105907c24c61f545c94fcbabe (base: e739100)
+Compilazione basata sul commit 2d95d09fc0134033eedbaed1beaffbeeb71b5197 (base: 2d95d09)
 
 ## Falliti
 💡 Nessun errore di compilazione
 
 ## Compilati
-✅ [docs/lavoro/Analisi_dei_Requisiti_v1.0.pdf](docs/lavoro/Analisi_dei_Requisiti_v1.0.pdf)
+✅ [docs/lavoro/base.pdf](docs/lavoro/base.pdf)
 
