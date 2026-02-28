@@ -1,10 +1,40 @@
-# Guida all'uso del compilatore automatico del repository
-1) I progetti latex vanno caricati nell'apposita cartella src. Potete caricare progetti latex mono-file oppure multi-file. Per i progetti multi-file è importante che esista un file `.tex` principale e una cartella obbligatoriamente chiamata `contenuti/` in cui disporre tutti i file secondari del progetto (questo nome è un vincolo tecnico per far funzionare la build).
-2) I file `.pdf` firmati devono essere caricati a mano in `docs/` dopo averli rinominati con un nome che termina con `firmato.pdf` oppure `signed.pdf` (esempio: `verbale_v0.2_firmato.pdf`). Questi file infatti pur essendo "orfani" verranno ignorati dal controllo di integritá (e quindi non eliminati) tra `src/` e `docs/` grazie al loro nome specifico.
-3) strutturare il nome del file latex mettendo la versione alla fine (es: nome_v0.1.5.tex). Quando si inserisce un file `.pdf` firmato a mano, si deve aggiungere la parola `firmato` o `signed` alla fine nel nome del file pdf (es: nome_v0.1.5_firmato.pdf). L'ordine è importante per garantire allo script python del sito web di riconoscere correttamente versione del file e presenza della firma. Per fare gli spazi si può usare `_` o il classico spazio. Utilizzare il `-` per le date.
-4) È possibile l'attivazione dei workflow anche manualmente direttamente tramite pulsante dedicato in github action.
-5) Report sui risultati di compilazione della build: potete controllare quali file sono stati effettivamente compilati correttamente, e quali hanno fallito la compilazione, nel file `report.md` (si aggiorna ad ogni build chiaramente).
-6) Il sistema di build parte in automatico solo nel caso venissero aggiunti/modificati file .tex in `src/`, dunque nel caso venissero modificate immagini, bibliografia, ecc.. bisogna forzare la compilazione del file in uno dei seguenti due modi: 1) eliminando/modificando il rispettivo file pdf dalla cartella `docs/`; 2) facendo una modifica inutile nel file `.tex`
+# Guida all'uso del compilatore automatico
+
+### 1. Organizzazione dei file e Cartelle
+I progetti LaTeX vanno caricati nella cartella `src/`. Il sistema supporta due modalità:
+* **Progetti Mono-file:** Un singolo file `.tex` nella root o in una sottocartella.
+* **Progetti Multi-file:** È necessario avere un file `.tex` principale (il *main*) e una sottocartella chiamata **`contenuti/`** (o varianti come `Contenuti/`) dove posizionare i capitoli o le sezioni incluse.
+    > **Nota tecnica:** Il sistema riconosce automaticamente le modifiche ai file dentro le cartelle "contenuti" e innesca la ricompilazione di tutti i file `.tex` presenti nella cartella superiore (padre) per garantire che il documento principale venga aggiornato.
+
+### 2. Gestione dei PDF Firmati
+I file PDF firmati **devono essere caricati manualmente** nella cartella `docs/`.
+Per evitare che il sistema di pulizia automatica li elimini (poiché non hanno un corrispettivo `.tex` in `src/`), è obbligatorio che il nome del file termini con:
+* `_firmato.pdf`
+* `_signed.pdf`
+
+*Esempio corretto:* `verbale_v1.0_firmato.pdf`
+
+### 3. Convenzioni di Nomenclatura (Versionamento)
+Per garantire la corretta indicizzazione da parte del sito web e degli script di parsing:
+* **Versione:** Inserire la versione alla fine del nome del file (es: `nome_progetto_v0.1.5.tex`).
+* **Spazi:** Utilizzare l'underscore `_` o lo spazio standard.
+* **Date:** Utilizzare il trattino `-` per le date (es: `2023-10-12`).
+* **File Firmati:** Come indicato sopra, aggiungere il suffisso `_firmato` o `_signed` dopo la versione (es: `nome_progetto_v0.1.5_firmato.pdf`).
+
+### 4. Attivazione Manuale
+Oltre all'attivazione automatica su `push`, è possibile avviare la build manualmente dalla scheda **Actions** di GitHub selezionando il workflow e cliccando su "Run workflow".
+
+### 5. Report e Debug
+Al termine di ogni esecuzione, viene generato il file **`report.md`** nella root del repository. Consultatelo per verificare:
+* ✅ Quali file sono stati compilati con successo (con link diretto).
+* ❌ Quali file hanno fallito la compilazione (con link ai log di errore).
+
+### 6. Trigger, Aggiornamenti e Rigenerazione Totale
+Il sistema parte in automatico quando vengono aggiunti o modificati file `.tex` in `src/`.
+Tuttavia, esistono casi particolari per forzare la compilazione:
+* **Aggiornamento risorse esterne:** Se modificate solo immagini o bibliografia senza toccare i `.tex`, la build non parte. Per forzare l'aggiornamento, fate una modifica fittizia (es. uno spazio) nel file `.tex` principale oppure eliminate il singolo PDF da `docs/`.
+* **Rigenerazione Totale (Full Rebuild):** Per forzare la ricompilazione di **tutti** i documenti presenti nel repository, è sufficiente **eliminare completamente la cartella `docs/`** e fare il push. Il sistema rileverà l'assenza di tutti i PDF e li rigenererà da zero.
+    > ⚠️ **Attenzione:** Eliminando l'intera cartella `docs/` verranno persi anche i file firmati manualmente. Assicuratevi di averne una copia di backup da ricaricare successivamente.
 
 # Obiettivi della build di compilazione automatica
 
