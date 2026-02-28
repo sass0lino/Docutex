@@ -53,8 +53,9 @@ jobs:
               [ -z "$file" ] && continue
               if echo "$file" | grep -q -i "/contenuti/"; then
                 parent_dir=$(echo "$file" | sed 's|/contenuti/.*||I')
-                parent_tex=$(find "$parent_dir" -maxdepth 1 -type f -name "*.tex" | head -n 1)
-                [ -n "$parent_tex" ] && echo "$parent_tex" >> pdfs_to_remove.txt
+                if [ -d "$parent_dir" ]; then
+                  find "$parent_dir" -maxdepth 1 -type f -name "*.tex" >> pdfs_to_remove.txt
+                fi
               else
                 echo "$file" >> pdfs_to_remove.txt
               fi
