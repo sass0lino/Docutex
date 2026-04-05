@@ -34,6 +34,16 @@ Comportamento sul sito:
 * **Lista documenti visibile:** mostra tutti i PDF, tranne i duplicati con stesso identificativo `nome + data + versione` dove viene preferito il file `firmato/signed`.
 * **Link stabile:** viene creato solo per documenti con versione, raggruppando per `cartella + nome + data` (la firma non incide). Il link stabile punta sempre alla versione piu alta disponibile.
 
+Come calcolare il link stabile (quando vuoi scriverlo a mano):
+1. Parti dal **nome documento** estratto, quindi senza versione e senza firma.
+2. Applica la normalizzazione del sito: **Title Case** (ogni parola con iniziale maiuscola, quindi `dei` diventa `Dei`) e rimozione di eventuali caratteri non ASCII.
+3. Sostituisci gli spazi con `_` e aggiungi `.pdf`.
+4. Anteponi il percorso cartella: `./docs/<cartella>/`.
+
+Esempio diretto:
+* File: `Analisi_dei Requisiti v1.0 firmato.pdf`
+* Link stabile: `./docs/scuola/Analisi_Dei_Requisiti.pdf`
+
 Esempio pratico (stessa cartella):
 * File presenti in `docs/scuola/`: `analisi_requisiti_2026-04-05_v2.0.pdf`, `analisi_requisiti_2026-04-05_v2.1_firmato.pdf`
 * Link del file mostrato sul sito (click dalla lista): `./docs/scuola/analisi_requisiti_2026-04-05_v2.1_firmato.pdf`
