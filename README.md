@@ -9,10 +9,37 @@ I file firmati vanno caricati **manualmente** in `docs/`.
 Per evitarne la cancellazione automatica, il nome deve terminare obbligatoriamente con `_firmato.pdf` o `_signed.pdf` (es: `verbale_v1.0_firmato.pdf`).
 
 ### 3. Nomenclatura (Importante per il Sito Web)
-Per consentire allo script Python di generare correttamente l'albero dei file per il sito GitHub Pages, seguire queste regole:
-* **Versione:** Va posta alla fine del nome (es: `nome_progetto_v0.1.5.tex`).
-* **Separatori:** Usare `_` o spazi standard. Per le date usare il trattino `-` (es: `2023-10-12`).
-* **Firma:** Il suffisso `_firmato` deve seguire la versione (es: `nome_progetto_v0.1.5_firmato.pdf`).
+Per consentire allo script Python di estrarre correttamente i metadati e costruire i link del sito, usare questa struttura (in ordine):
+
+`nome_file [data] [versione] [firma]`
+
+Regole formali:
+* **Ordine campi:** nome -> data opzionale -> versione opzionale -> firma opzionale.
+* **Separatori tra campi:** solo `_` oppure spazio (` `). Non sono ammessi altri separatori tra i campi.
+* **Data (opzionale):** formato obbligatorio `YYYY-MM-DD`.
+* **Versione (opzionale):** formato `vX`, `vX.Y` oppure `vX.Y.Z`.
+* **Firma (opzionale):** solo token finale `firmato` oppure `signed`.
+
+Esempi validi:
+* `analisi_requisiti_2026-04-05_v2.1.pdf`
+* `analisi requisiti 2026-04-05 v2.1 firmato.pdf`
+* `verbale_2026-03-10.pdf`
+
+Esempi non riconosciuti come metadati (restano parte del nome):
+* `analisi-requisiti-v2.1.pdf` (usa `-` tra campi)
+* `analisi.requisiti.v2.1.pdf` (usa `.` tra campi)
+* `analisi_signed_v2.1.pdf` (firma non in posizione finale)
+
+Comportamento sul sito:
+* **Lista documenti visibile:** mostra tutti i PDF, tranne i duplicati con stesso identificativo `nome + data + versione` dove viene preferito il file `firmato/signed`.
+* **Link stabile:** viene creato solo per documenti con versione, raggruppando per `cartella + nome + data` (la firma non incide). Il link stabile punta sempre alla versione piu alta disponibile.
+
+Esempio pratico (stessa cartella):
+* File presenti in `docs/scuola/`: `analisi_requisiti_2026-04-05_v2.0.pdf`, `analisi_requisiti_2026-04-05_v2.1_firmato.pdf`
+* Link del file mostrato sul sito (click dalla lista): `./docs/scuola/analisi_requisiti_2026-04-05_v2.1_firmato.pdf`
+* Link stabile da condividere (email, slide, documenti esterni): `./docs/scuola/Analisi_Requisiti_2026-04-05.pdf`
+
+Nota: dopo un aggiornamento a `v2.2`, il link mostrato sul sito cambia, ma il link stabile resta uguale e punta automaticamente al PDF piu recente.
 
 ### 4. Attivazione Manuale
 È possibile avviare la build manualmente dalla scheda **Actions** di GitHub selezionando il workflow e cliccando su "Run workflow".

@@ -313,14 +313,58 @@ ul {list-style:none;margin:0;padding:0;}
  color:var(--text);
  font-size:.95rem;
  display:flex;
- align-items:center;
- gap:6px;
+ align-items:flex-start;
+ gap:8px;
+ min-width: 0;
 }
 .file-name:hover {color:var(--primary)}
+
+.file-labels {
+ display:flex;
+ flex-direction:column;
+ gap:3px;
+ min-width: 0;
+}
+
+.file-title {
+ font-weight:500;
+ line-height:1.3;
+ word-break: break-word;
+}
+
+.file-meta {
+ display:flex;
+ flex-wrap:wrap;
+ gap:6px;
+}
+
+.meta-pill {
+ display:inline-flex;
+ align-items:center;
+ border:1px solid var(--border);
+ background:var(--bg-card);
+ color:var(--muted);
+ padding:1px 7px;
+ border-radius:999px;
+ font-size:.72rem;
+ line-height:1.4;
+ white-space:nowrap;
+}
+
+.meta-date {
+ border-color: color-mix(in srgb, var(--border) 70%, #2f8f83 30%);
+}
+
+.meta-version {
+ border-color: color-mix(in srgb, var(--border) 70%, #2f5d9b 30%);
+ font-weight:600;
+}
+
 .icon-pdf {
  width:15px;
  height:15px;
  opacity:.9;
+ margin-top:2px;
 }
 
 .download-button {
@@ -359,11 +403,16 @@ ul {list-style:none;margin:0;padding:0;}
 
 .signed-badge {
  background:var(--primary);
- color:white;
- padding:1px 6px;
- font-size:.75rem;
- border-radius:6px;
- margin-left:4px;
+ color:var(--primary-hover-text);
+ border-color: transparent;
+ font-weight:600;
+}
+
+@media (max-width: 720px) {
+  .pdf_row {
+    align-items: flex-start;
+    gap: 10px;
+  }
 }
 
 mark {

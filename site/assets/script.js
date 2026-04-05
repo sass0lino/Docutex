@@ -139,14 +139,55 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         const row = document.createElement("div");
         row.className = "pdf_row";
-        const version = item.version ? ` v${item.version.replace(/^v+/, "")}` : "";
-        const date = item.date ? ` ${item.date}` : "";
-        const signed = item.signed ? `<span class="signed-badge">Firmato</span>` : "";
+        const version = item.version ? `v${item.version.replace(/^v+/, "")}` : "";
         const link = document.createElement("a");
         link.className = "file-name";
         link.href = item.path;
         link.target = "_blank";
-        link.innerHTML = `<img src="./assets/images/pdf.svg" class="icon-pdf"> ${item.name}${date}${version} ${signed}`;
+
+        const icon = document.createElement("img");
+        icon.src = "./assets/images/pdf.svg";
+        icon.className = "icon-pdf";
+        icon.alt = "PDF";
+
+        const labels = document.createElement("div");
+        labels.className = "file-labels";
+
+        const title = document.createElement("span");
+        title.className = "file-title";
+        title.textContent = item.name;
+        labels.appendChild(title);
+
+        const meta = document.createElement("div");
+        meta.className = "file-meta";
+
+        if (item.date) {
+          const dateChip = document.createElement("span");
+          dateChip.className = "meta-pill meta-date";
+          dateChip.textContent = item.date;
+          meta.appendChild(dateChip);
+        }
+
+        if (version) {
+          const versionChip = document.createElement("span");
+          versionChip.className = "meta-pill meta-version";
+          versionChip.textContent = version;
+          meta.appendChild(versionChip);
+        }
+
+        if (item.signed) {
+          const signedChip = document.createElement("span");
+          signedChip.className = "meta-pill signed-badge";
+          signedChip.textContent = "Firmato";
+          meta.appendChild(signedChip);
+        }
+
+        if (meta.childElementCount) {
+          labels.appendChild(meta);
+        }
+
+        link.append(icon, labels);
+
         const dl = document.createElement("a");
         dl.href = item.path;
         dl.download = "";

@@ -1,0 +1,53 @@
+{
+  "lavoro": [
+    {
+      "type": "file",
+      "name": "Oscillatore",
+      "version": null,
+      "date": null,
+      "signed": false,
+      "path": "./docs/lavoro/oscillatore.pdf",
+      "search_name": "oscillatore"
+    },
+    {
+      "type": "file",
+      "name": "Base",
+      "version": null,
+      "date": null,
+      "signed": false,
+      "path": "./docs/lavoro/base.pdf",
+      "search_name": "base"
+    }
+  ],
+  "scuola": [
+    {
+      "type": "file",
+      "name": "Matematica",
+      "version": null,
+      "date": null,
+      "signed": false,
+      "path": "./docs/scuola/matematica.pdf",
+      "search_name": "matematica"
+    },
+    {
+      "type": "file",
+      "name": "Analisi Dei Requisiti",
+      "version": "v1.0",
+      "date": null,
+      "signed": false,
+      "path": "./docs/scuola/Analisi_dei_Requisiti_v1.0.pdf",
+      "search_name": "analisi dei requisiti v1.0"
+    }
+  ],
+  "Root files": [
+    {
+      "type": "file",
+      "name": "Logistica",
+      "version": null,
+      "date": null,
+      "signed": false,
+      "path": "./docs/logistica.pdf",
+      "search_name": "logistica"
+    }
+  ]
+}
