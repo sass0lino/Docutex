@@ -155,35 +155,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const title = document.createElement("span");
         title.className = "file-title";
-        title.textContent = item.name;
+        title.textContent = item.date ? `${item.name} ${item.date}` : item.name;
         labels.appendChild(title);
-
-        const meta = document.createElement("div");
-        meta.className = "file-meta";
-
-        if (item.date) {
-          const dateChip = document.createElement("span");
-          dateChip.className = "meta-pill meta-date";
-          dateChip.textContent = item.date;
-          meta.appendChild(dateChip);
-        }
 
         if (version) {
           const versionChip = document.createElement("span");
           versionChip.className = "meta-pill meta-version";
           versionChip.textContent = version;
-          meta.appendChild(versionChip);
+          labels.appendChild(versionChip);
         }
 
         if (item.signed) {
           const signedChip = document.createElement("span");
           signedChip.className = "meta-pill signed-badge";
           signedChip.textContent = "Firmato";
-          meta.appendChild(signedChip);
-        }
-
-        if (meta.childElementCount) {
-          labels.appendChild(meta);
+          labels.appendChild(signedChip);
         }
 
         link.append(icon, labels);
